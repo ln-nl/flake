@@ -23,10 +23,6 @@
           inherit (pkgs) fetchurl stdenv lib;
         };
 
-        firebase-tools = import ./firebase-tools {
-          inherit (pkgs) lib buildNpmPackage fetchFromGitHub;
-        };
-
         http-server = import ./http-server {
           inherit (pkgs) lib buildNpmPackage fetchFromGitHub;
         };
