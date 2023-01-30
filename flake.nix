@@ -76,11 +76,6 @@
           inherit pkgs;
         };
 
-        pianoteq = import ./pianoteq {
-          inherit (pkgs) lib stdenv curl jq xorg alsa-lib freetype
-            p7zip autoPatchelfHook writeShellScript zlib pipewire makeWrapper;
-        };
-
         texturepacker = import ./texturepacker {
           inherit (pkgs) stdenv dpkg fetchurl autoPatchelfHook;
           inherit (pkgs.qt6) qtwayland;
