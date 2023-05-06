@@ -8,31 +8,27 @@
 , pkg-config
 , file
 , findutils
-, glib
 , gtk3
-, gtk4
-, libnma
-, libnma-gtk4
+, networkmanager
+, ppp
+, xl2tpd
 , libreswan
 , libsecret
-, networkmanager
-, openssl
-, ppp
-, nss
-, xl2tpd
+, libnma
+, glib
 , withGnome ? true
 }:
 
 stdenv.mkDerivation rec {
   name = "${pname}${if withGnome then "-gnome" else ""}-${version}";
   pname = "NetworkManager-l2tp-modp1024";
-  version = "1.20.10";
+  version = "1.2.12";
 
   src = fetchFromGitHub {
     owner = "nm-l2tp";
     repo = "NetworkManager-l2tp";
     rev = version;
-    sha256 = "sha256-EfWvh4uSzWFadZAHTqsKa3un2FQ6WUbHLoHo9gSS7bE=";
+    sha256 = "sha256-pKIlTj85uNF/IcaePQ8YoyMXLa5/KEKPQhqlSvc8ADM=";
   };
 
   patches = [
@@ -42,33 +38,24 @@ stdenv.mkDerivation rec {
     })
   ];
 
-  nativeBuildInputs = [
-    autoreconfHook
-    pkg-config
-  ];
+  buildInputs = [ networkmanager ppp glib ]
+    ++ lib.optionals withGnome [ gtk3 libsecret libnma ];
 
-  buildInputs = [
-    networkmanager
-    ppp
-    glib
-    openssl
-    nss
-  ] ++ lib.optionals withGnome [
-    gtk3
-    gtk4
-    libsecret
-    libnma
-    libnma-gtk4
-  ];
+  nativeBuildInputs = [ autoreconfHook libtool intltool pkg-config file findutils ];
+
+  preConfigure = ''
+    intltoolize -f
+  '';
 
   configureFlags = [
+    "--without-libnm-glib"
     "--with-gnome=${if withGnome then "yes" else "no"}"
-    "--with-gtk4=${if withGnome then "yes" else "no"}"
     "--localstatedir=/var"
+    "--sysconfdir=$(out)/etc"
     "--enable-absolute-paths"
     # For use with libreswan < 3.30 or libreswan packages built with
     # USE_DH2=true i.e. have modp1024 support.
-    # "--enable-libreswan-dh2"
+    "--enable-libreswan-dh2"
   ];
 
   enableParallelBuilding = true;
@@ -81,7 +68,7 @@ stdenv.mkDerivation rec {
     description = "L2TP plugin for NetworkManager";
     inherit (networkmanager.meta) platforms;
     homepage = "https://github.com/nm-l2tp/network-manager-l2tp";
-    license = licenses.gpl2Plus;
+    license = licenses.gpl2;
     maintainers = with maintainers; [ abbradar obadz ];
   };
 }
