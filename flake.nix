@@ -45,7 +45,7 @@
         };
 
         libreswan = import ./libreswan {
-          inherit (pkgs) lib stdenv fetchurl nixosTests pkg-config systemd gmp
+          inherit (pkgs) lib stdenv fetchurl nixosTests pkg-config systemd gmp dns-root-data
             unbound bison flex pam libevent libcap_ng libxcrypt curl nspr bash runtimeShell iproute2
             iptables procps coreutils gnused gawk nss which python3 libselinux
             ldns xmlto docbook_xml_dtd_412 docbook_xsl findXMLCatalogs;
@@ -53,8 +53,8 @@
 
         networkmanager-l2tp = import ./networkmanager-l2tp {
           inherit (pkgs) lib stdenv substituteAll fetchFromGitHub
-            autoreconfHook libtool intltool pkg-config file findutils gtk3
-            networkmanager ppp xl2tpd libsecret libnma glib;
+            autoreconfHook libtool intltool pkg-config file findutils gtk3 gtk4
+            networkmanager openssl ppp nss xl2tpd libsecret libnma libnma-gtk4 glib;
 
           inherit (packages.x86_64-linux) libreswan;
         };
