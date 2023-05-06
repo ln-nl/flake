@@ -147,19 +147,34 @@
           findutils
           gtk3
           networkmanager
-          ppp
           xl2tpd
           libsecret
           libnma
           glib
           ;
 
-        inherit (packages.x86_64-linux) libreswan;
+        inherit (packages.x86_64-linux) libreswan ppp;
       };
 
       nodePackages = import ./node-packages {
         inherit (pkgs) system stdenv lib;
         inherit pkgs;
+      };
+
+      ppp = import ./ppp {
+        inherit
+          (pkgs)
+          lib
+          stdenv
+          fetchFromGitHub
+          substituteAll
+          libpcap
+          libxcrypt
+          openssl
+          bash
+          nixosTests
+          writeTextDir
+          ;
       };
 
       texturepacker = import ./texturepacker {
