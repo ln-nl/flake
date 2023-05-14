@@ -93,88 +93,9 @@
           ;
       };
 
-      libreswan = import ./libreswan {
-        inherit
-          (pkgs)
-          lib
-          stdenv
-          fetchurl
-          nixosTests
-          pkg-config
-          systemd
-          gmp
-          unbound
-          bison
-          flex
-          pam
-          libevent
-          libcap_ng
-          libxcrypt
-          curl
-          nspr
-          bash
-          runtimeShell
-          iproute2
-          iptables
-          procps
-          coreutils
-          gnused
-          gawk
-          nss
-          which
-          python3
-          libselinux
-          ldns
-          xmlto
-          docbook_xml_dtd_412
-          docbook_xsl
-          findXMLCatalogs
-          ;
-      };
-
-      networkmanager-l2tp = import ./networkmanager-l2tp {
-        inherit
-          (pkgs)
-          lib
-          stdenv
-          substituteAll
-          fetchFromGitHub
-          autoreconfHook
-          libtool
-          intltool
-          pkg-config
-          file
-          findutils
-          gtk3
-          networkmanager
-          xl2tpd
-          libsecret
-          libnma
-          glib
-          ;
-
-        inherit (packages.x86_64-linux) libreswan ppp;
-      };
-
       nodePackages = import ./node-packages {
         inherit (pkgs) system stdenv lib;
         inherit pkgs;
-      };
-
-      ppp = import ./ppp {
-        inherit
-          (pkgs)
-          lib
-          stdenv
-          fetchFromGitHub
-          substituteAll
-          libpcap
-          libxcrypt
-          openssl
-          bash
-          nixosTests
-          writeTextDir
-          ;
       };
 
       texturepacker = import ./texturepacker {
