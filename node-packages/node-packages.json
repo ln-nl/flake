@@ -1,6 +1,3 @@
 [
-  "@typescript-eslint/eslint-plugin",
-  "@typescript-eslint/parser",
-  "eslint",
-  "eslint-plugin-import"
+    {"npm-audit-html": "beta"}
 ]
