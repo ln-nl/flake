@@ -103,10 +103,6 @@
         inherit (pkgs.qt6) qtwayland;
       };
 
-      videoshot = import ./videoshot {
-        inherit (pkgs) wf-recorder slurp libnotify coreutils bash resholve;
-      };
-
       yo = import ./yo {
         inherit (pkgs) lib buildNpmPackage fetchFromGitHub;
       };
