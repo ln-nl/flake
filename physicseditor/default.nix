@@ -40,9 +40,9 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    homepage = "https://code-industry.net/masterpdfeditor/";
-    description = "a multifunctional PDF Editor";
-    # license = licenses.proprietary;
-    platforms = platforms.linux;
+    homepage = "https://www.codeandweb.com/physicseditor";
+    description = "Edit your collision shapes for Box2d, Chipmunk, Ninja, P2, Arcade";
+    license = lib.licenses.unfree;
+    platforms = [ "x86_64-linux" ];
   };
 }
