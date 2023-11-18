@@ -19,6 +19,10 @@
         inherit (pkgs) lib buildNpmPackage fetchFromGitHub;
       };
 
+      npm-audit-html = import ./npm-audit-html {
+        inherit (pkgs) lib buildNpmPackage fetchFromGitHub;
+      };
+
       fbx2gltf = import ./fbx2gltf {
         inherit (pkgs) fetchurl stdenv lib;
       };
@@ -91,11 +95,6 @@
           libXinerama
           libXrandr
           ;
-      };
-
-      nodePackages = import ./node-packages {
-        inherit (pkgs) system stdenv lib;
-        inherit pkgs;
       };
 
       yo = import ./yo {
