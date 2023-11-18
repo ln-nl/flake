@@ -13,16 +13,6 @@ buildNpmPackage rec {
 
   npmDepsHash = "sha256-I7KIkl781reNqd4gnqQ1loCm9nZZMqMMjul+pRiI7DE=";
 
-  # unpackPhase = ''
-  #   mv npm-shrinkwrap.json package-lock.json
-  # '';
-
-  # dontNpmBuild = true;
-
-  # patches = [ ./package-lock.patch ];
-
-  # NODE_OPTIONS = "--openssl-legacy-provider";
-
   meta = with lib; {
     description = "A simple zero-configuration command-line http server ";
     homepage = "https://github.com/http-party/http-server";
