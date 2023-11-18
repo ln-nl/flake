@@ -96,10 +96,6 @@
           libXrandr
           ;
       };
-
-      yo = import ./yo {
-        inherit (pkgs) lib buildNpmPackage fetchFromGitHub;
-      };
     };
   };
 }
