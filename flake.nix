@@ -98,11 +98,6 @@
         inherit pkgs;
       };
 
-      texturepacker = import ./texturepacker {
-        inherit (pkgs) stdenv dpkg fetchurl autoPatchelfHook;
-        inherit (pkgs.qt6) qtwayland;
-      };
-
       yo = import ./yo {
         inherit (pkgs) lib buildNpmPackage fetchFromGitHub;
       };
