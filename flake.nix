@@ -25,6 +25,21 @@
 
         flashback = (import ./flashback/Cargo.nix { inherit pkgs; }).rootCrate.build;
 
+        httplib2shim = import ./httplib2shim {
+          inherit (pkgs)
+            lib
+            python3Packages
+            fetchPypi
+            fetchpatch
+            ;
+        };
+
+        scoutsuite = import ./scoutsuite {
+          inherit (packages.x86_64-linux) httplib2shim;
+
+          inherit (pkgs) lib python3Packages fetchFromGitHub;
+        };
+
         flashplayer-standalone-debugger = import ./flashplayer/standalone.nix {
           inherit (pkgs)
             stdenv
